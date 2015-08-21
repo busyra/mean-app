@@ -1,12 +1,12 @@
 app.controller('meetupsController',['$scope', '$resource',
   function($scope, $resource){
     var Meetup = $resource('/api/meetups');
-
-    $scope.meetups=[
-      { name: "MEET UP 1"},
-      { name: "MEET UP 2"},
-      { name: "MEET UP 3"}
-    ]
+    
+    //find meet up and uses a get request
+    Meetup.query(function(results){
+      $scope.meetups = results;
+    });
+    $scope.meetups=[]
     $scope.createMeetup = function(){
       var meetup = new Meetup();
       meetup.name = $scope.meetupName;
